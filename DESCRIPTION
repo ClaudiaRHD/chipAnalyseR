@@ -1,0 +1,11 @@
+Package: chipAnalyser
+Type: Package
+Title: Open and analyse data from ChIP-seq experiments. Especially bigWig files and bed files
+Version: 0.1.0
+Author: Who wrote it
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: MIT
+LazyData: TRUE
+RoxygenNote: 6.0.1
+Depends: data.table, ggplot2, cowplot

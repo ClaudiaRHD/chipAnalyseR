@@ -31,7 +31,7 @@ peak_anno = function(p_anno = NULL, state2color = NULL ){
     colr = RColorBrewer::brewer.pal(n = 8, name = 'Dark2')
   }
 
-
+  colr = RColorBrewer::brewer.pal(n = 8, name = 'Dark2')
   message("count annotation frequency and order them...")
   pa = anno[,.N, name]
   pa = pa [order(pa[,2]),]
@@ -45,7 +45,8 @@ peak_anno = function(p_anno = NULL, state2color = NULL ){
  #return(colr)
   
   message("creating pie chart...")
-  pie(x = pa$N, labels =paste(pa$name, "( N=",pa$N,",", pa$pct,"%)") , main = paste("Peak Annotations of ", basename(segmentation)),
+  pie(x = pa$N, labels =paste(pa$name, "( N=",pa$N,",", pa$pct,"%)") , main = paste("Peak Annotations of ", basename(p_anno)),
         col = colr, density = 60, init.angle = 180, border = "grey60", clockwise = FALSE, cex =0.6, cex.main=1)
   message("Pie chart done.")
 }      
+      

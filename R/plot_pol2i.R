@@ -16,3 +16,4 @@ plot_pol2i = function(pol2_table = NULL){
   legend( "bottomright",inset = .1, bty = "n", legend = legendt, col = c(1:length(table)), lty = 1, cex = 0.8)
   message("Pol2 index plotting done.")
 }
+

@@ -9,8 +9,8 @@ peak_annos = function(p_anno = NULL, state2color = NULL ){
     stop("no p_anno file available")
   }  
   
-  # message("creating temporary peak annotation file...")
-  # tem_pa= paste0( basename(p_anno), '.txt')
+  message("creating temporary peak annotation file...")
+  tem_pa= paste0( basename(p_anno), '.txt')
   
   message("reading peak annotation file...")
   anno = list()
@@ -52,4 +52,4 @@ peak_annos = function(p_anno = NULL, state2color = NULL ){
     col = colr, density = 60, init.angle = 180, border = "grey60", clockwise = FALSE, cex =0.6, cex.main=1)
   })
     message("Pie chart done.")
-}     
+}      

@@ -69,3 +69,5 @@ get_matrix = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL
   message("Done.")
   return(result)
 }
+
+
