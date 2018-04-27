@@ -54,11 +54,11 @@ plot_hm = function(mat = NULL, clusterBy = 'avg', num_k = NULL){
     lapply(mat_prof, function(x){
       #yls = c(0, round(max(unlist(x), na.rm = TRUE), digits = 2))
       par(mar = c(1,4,4,1))
-      plot(x$'1',xlab = '', ylab =  "RPM", axes = FALSE, pch = 16, cex = 0.8 , las = 1, type = "l", col = 1, ylim = yls, cex.lab = 0.8)
+  plot(x$'1',xlab = '', ylab =  "RPM", axes = FALSE, pch = 16, cex = 1 , las = 1, type = "l", col = 1, ylim = yls, cex.lab = 1, font.lab=2, lwd= 2)
       if(length(x) > 1){
         for(i in 2:length(x)){
-          points(x[[i]], pch = 16, cex = 0.8 , las = 1, type = "l", col = i)
-          graphics::axis( side = 2, at = yls, labels = yls, las= 1, cex.axis = 0.8)
+          points(x[[i]], pch = 16, cex = 0.8 , las = 1, type = "l", col = i, lwd = 2)
+          graphics::axis( side = 2, at = yls, labels = yls, las= 1, cex.axis = 1, font = 2, lwd = 2)
         }
       }
     })
@@ -81,8 +81,8 @@ plot_hm = function(mat = NULL, clusterBy = 'avg', num_k = NULL){
     lapply(mat_prof, function(x){
       #yls = c(0, round(max(unlist(x), na.rm = TRUE), digits = 2))
       par(mar = c(1,4,4,1))
-      plot(x,xlab = '', ylab =  "RPM", axes = FALSE, pch = 16, cex = 0.8 , las = 1, type = "l", col = 1, ylim = yls, cex.lab = 0.8)
-      graphics::axis( side = 2, at = yls, labels = yls, las= 1, cex.axis = 0.8)    
+      plot(x,xlab = '', ylab =  "RPM", axes = FALSE, pch = 16, cex = 1 , las = 1, type = "l", col = 1, ylim = yls, cex.lab = 1, font.lab=2, lwd = 2)
+      graphics::axis( side = 2, at = yls, labels = yls, las= 1, cex.axis = 1, font = 2, lwd = 2)    
     })  
     matAvg = matavg[[1]]
     #plot.new()
@@ -97,19 +97,19 @@ plot_hm = function(mat = NULL, clusterBy = 'avg', num_k = NULL){
     x = t(scale(x = t(x)))
     par(mar = c(8,4,4,1),xpd = NA) ### set the margin
     image(x = t(as.matrix(x)), col = hm.col, axes = FALSE)
-    axis(side = 1, at = c(0, 1), labels = c(-matAvg$region[1], matAvg$region[2]), cex.axis = 0.8, line = 1, font = 2)
+    axis(side = 1, at = c(0, 1), labels = c(-matAvg$region[1], matAvg$region[2]), cex.axis = 0.9, line = 1, font = 2, lwd = 2)
     mtext(text = paste("region around peak [bp]"), side = 1, line = 3, cex = 0.7, font = 2 )
     title(main = names(matAvg[i]), adj = 0, cex.main = 0.9, line = 1)
-    if(!is.null(num_k)){
-      polygon(x = c(0,1,1,0), y = c(0,0,(cuts[[1]]-1)/cutsum,(cuts[[1]]-1)/cutsum),col = 'black', density = 0, lwd = 2)
-      for (j in 1:(length(cuts)-1)) {
-        polygon(x = c(0,1,1,0), y = c(cuts[[j]]/cutsum,cuts[[j]]/cutsum,(cuts[[j+1]])/cutsum,(cuts[[j+1]]-1)/cutsum),col = j+1, density = 0, lwd = 2)
-        #segments(x0 = 0, x1 = 1, y0 = cuts[[j]]/cutsum, y1 = cuts[[y]]/cutsum, col= j)
-        #abline(h = (cuts[[j]]/cutsum), col = j, lwd = 2)
-      }
-      polygon(x = c(0,1,1,0), y = c(cuts[[length(cuts)]]/cutsum,cuts[[length(cuts)]]/cutsum,1,1),col = length(cuts), density = 0, lwd=2)
-      
-      mtext(text = "cluster", side = 2, line = 2)
+        if(!is.null(num_k)){
+        polygon(x = c(0,1,1,0), y = c(0,0,(cuts[[1]]-1)/cutsum,(cuts[[1]]-1)/cutsum),col = 'black', density = 0, lwd = 2)
+        for (j in 1:(length(cuts)-1)) {
+          polygon(x = c(0,1,1,0), y = c(cuts[[j]]/cutsum,cuts[[j]]/cutsum,(cuts[[j+1]])/cutsum,(cuts[[j+1]]-1)/cutsum),col = j+1, density = 0, lwd = 2)
+          #segments(x0 = 0, x1 = 1, y0 = cuts[[j]]/cutsum, y1 = cuts[[y]]/cutsum, col= j)
+          #abline(h = (cuts[[j]]/cutsum), col = j, lwd = 2)
+        }
+        polygon(x = c(0,1,1,0), y = c(cuts[[length(cuts)]]/cutsum,cuts[[length(cuts)]]/cutsum,1,1),col = length(cuts), density = 0, lwd=2)
+        
+      mtext(text = "cluster", side = 2, line = 2, font = 2, cex = 0.8)
       
       legendt = c()
       #for(i in 1:nmats){
@@ -126,12 +126,12 @@ plot_hm = function(mat = NULL, clusterBy = 'avg', num_k = NULL){
   
   par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
   plot(0, 0, type = "n", bty = "n", xaxt = "n", yaxt = "n")
-  mtext(text = "Analysis ",side = 3, outer = TRUE, cex = 1.5, line = -2, font = 2)
+  #mtext(text = "Analysis ",side = 3, outer = TRUE, cex = 1.5, line = -2, font = 2)
   #image(x=rep(n,2)+c(2,3)+1, y=(3:4) -0.5, z=matrix(1), col=hm.col, add=TRUE)
   
   
   if(!is.null(num_k)){
-  legend("bottom", legend= legendt, xpd = TRUE, horiz = TRUE, inset = c(0, 0), bty = "n", col = c(1:length(mat_prof[[1]])),lty = 1,  cex = 1)
+  legend("bottom", legend= legendt, xpd = TRUE, horiz = TRUE, inset = c(0, 0), bty = "n", col = c(1:length(mat_prof[[1]])),lty = 1,  cex = 1, lwd = 2, text.font = 2)
   } 
   
   #image(y = c(1+ (c(-0.5, 0.5))), x = rep(7) ,z = matrix(1:7, nrow = 7), col = c("red","blue"), add=TRUE)

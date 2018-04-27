@@ -41,6 +41,7 @@ k_means = function(mat = NULL, refmat= NULL,  k = NULL){
     sp = split(mat.ordered[[i]][,1:(length(x)-1)], mat.ordered[[i]]$clust)
     mat_sp[[i]] = sp
   }
+  
   names(mat_sp) = names(mat)[1:nmats]
   cut.pos = cumsum(unlist(lapply(mat_sp[[1]], nrow)))
   cut.sum = sum(unlist(lapply(mat_sp[[1]], nrow)))

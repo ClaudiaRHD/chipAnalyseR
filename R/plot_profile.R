@@ -22,7 +22,8 @@ plot_profile= function(mat_sum = NULL, opt = 'mean'){
   colnames(mat_sum) = c("sample", "value")
   mat_sum = cbind(mat_sum, x)
   
-  p = ggplot(data = mat_sum, aes(x=x, y= value, color=sample))+geom_line()+labs(x= "region around peak [bp]")+labs(y= "RPM")
+p = ggplot(data = mat_sum, aes(x=x, y= value, color=sample))+geom_line(size= 2)+labs(x= "region around peak [bp]")+labs(y= "RPM")+
+  cowplot::theme_cowplot(line_size = 1.5, font_size = 14)+theme(legend.position="bottom", legend.direction = "vertical", legend.box = "vertical")+theme(axis.title = element_text(face = "bold"))+theme(axis.text = element_text(face="bold", size=14))
   print(p)
   
 }

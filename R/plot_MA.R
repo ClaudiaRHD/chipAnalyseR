@@ -66,7 +66,7 @@ plot_MA = function(aucpi= NULL, anno = NULL, cond = NULL){
   aucpiav$cond_av = rowMeans(aucpiav[,cond1_av:cond2_av], na.rm=TRUE)
 
   aucpiav$log2_fc2 = log2(aucpiav$cond2_av+1)-log2(aucpiav$cond1_av+1)
-
+  
   aucpiav = aucpiav[order(log2_fc2),]
   
   sp = ggplot(data = aucpiav, aes(x= log2(cond_av+1), y= log2_fc2))+ geom_point(color = "black") + labs(x=paste("Average [log2]"), y= "log2 fold change")+ggtitle(paste(cond[1],"vs", cond[2]))+theme(axis.text.x = element_text(size=9)) 
