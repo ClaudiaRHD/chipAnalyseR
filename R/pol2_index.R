@@ -5,10 +5,13 @@
 #' @param bw_path The path to directory where bwtool is installed on the computer. Default value is NULL.
 #' @param op_dir The path to the operation directory currently used. Default value is NULL.
 #' @param filter Filter which can be used to filter the output list to remove  duplicated and overlapping genes as well as non necessary columns. Default value is TRUE.
+#' @param numcores Number of cores which should be used in parallelised process.Default value is NULL and will be defined as the number of available cores - 1.
 #' @return list (name, size_tss, sum_tss, size_gb, sum_gb, geneNAme, TxName, chrom ,strand, txStart, txEnd, nr, dr, pi). IF filter = TRUE : list (name, geneName, txName, chrom, strand, txStart, txEnd, nr, dr, pi, dif)
+#' @import parallel
+#' @import data.table
 #' @export
 
-pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL, filter= TRUE){
+pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL, filter= TRUE, numcores = NULL){
   if(is.null(gm)){
     stop("no gene modes file (gm) inserted ")
   }
@@ -28,6 +31,8 @@ pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
       dir.create(op_dir)
     }
   }
+  
+
 
   tss_pm = paste0( basename(gm), 'tss.txt')
   gb_pm = paste0( basename(gm), 'gb.txt')
@@ -69,8 +74,16 @@ pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
 
   mcmd = paste(bw_path,  'summary -header -with-sum -keep-bed')
 
+  #create cluster
+  if(is.null(numcores)){
+    ncores = parallel::detectCores()-1
+  } else{
+    ncores = numcores
+  }
+  cl = parallel::makeCluster(ncores)
+  
   #for tss
-  lapply(1:length(bw_files), function(x){
+  parLapply(cl, 1:length(bw_files), function(x){
     bn = paste0(basename(bw_files[[x]]), '_TSS.txt')
     mcmd2 = paste(mcmd, tss_pm, bw_files[[x]], bn)
     print(mcmd2)
@@ -81,7 +94,7 @@ pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
   names(tables_tss) = basename(bw_files)
 
   #for gene body
-  lapply(1:length(bw_files), function(x){
+  parLapply(cl, 1:length(bw_files), function(x){
     bnx = paste0(basename(bw_files[[x]]), '_GB.txt')
     mcmd3 = paste(mcmd, gb_pm, bw_files[[x]], bnx)
     print(mcmd3)
@@ -93,6 +106,8 @@ pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
 
   #remove temporary files from directory
   file.remove(tss_pm, gb_pm, output1, output2)
+  
+  stopCluster(cl)
 
   #remove unneccessary columns in tss and gene body
   tables_tss = lapply(tables_tss, function(x) x[, c(1:3,6:10):=NULL])
@@ -113,6 +128,7 @@ pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
   colnames(gm)[12] ='name'
   gmf = gm[,c(1:6, 12)]
   table = lapply(tables_tss, function(x) merge(x, gmf, by = 'name'))
+ 
 
   #calculate nr, dr and pi and add columns respectively
   table = lapply(table, function(x) x[, nr:= sum_tss/350])
@@ -128,10 +144,10 @@ pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
 
     #order by genename and pi-signal + remove rows with duplicated genenames
     message('Removing shorter tx and duplicated entries..')
-    table = lapply(table, function(x) x[order(geneName,pi),][!duplicated(x[,geneName]),][size_gb >=1000][, c('size_tss', 'sum_tss', 'size_gb', 'sum_gb'):=NULL])
+    table = lapply( table, function(x) x[order(geneName,pi),][!duplicated(x[,geneName]),][size_gb >=1000][, c('size_tss', 'sum_tss', 'size_gb', 'sum_gb'):=NULL])
 
     message('Removing overlapped entries..')
-    table = lapply(table, function(x){
+    table = lapply( table, function(x){
                       xs = split(x, as.factor(as.character(x$chrom)))
                       xsfixed = lapply(xs, function(chr){
                                     if(nrow(chr) > 1){
@@ -146,7 +162,7 @@ pol2_index = function(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
                       xsfixed
     })
 
-  table = lapply(table, function(x) x[dif >=3000])
+  table = lapply( table, function(x) x[dif >=3000])
   
   }
   

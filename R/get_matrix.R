@@ -8,11 +8,13 @@
 #' @param down Number of basepairs from peak to 3' end.Default value is 2500.
 #' @param pos Reference position of the region around a peak. Possibilities: '-starts' and '-ends'. Default value is '' and means a centered reference position.
 #' @param binsize Binsize of how many basepairs the avergae will be calculated. Default value is 25.
+#' @param numcores Number of cores which should be used in parallelised process.Default value is NULL and will be defined as the number of available cores - 1.
 #' @return result list with matrices and additional information about the input of the function 
+#' @import parallel
 #' @export
 
 
-get_matrix = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL, up = 2500, down = 2500, pos = '', binsize=25){
+get_matrix = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL, up = 2500, down = 2500, pos = '', binsize=25, numcores = NULL){
 
   #check for bwtools
   bw_path = check_bw(bw_path = bw_path)
@@ -47,9 +49,17 @@ get_matrix = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL
     op_dir = getwd()
   }
 
+  #create cluster
+  if(is.null(numcores)){
+    ncores = parallel::detectCores()-1
+  } else{
+    ncores = numcores
+  }
+  cl = parallel::makeCluster(ncores)
+  
   #create matrix
   mcmd = paste(bw_path,  'matrix -keep-bed -tiled-averages=')
-  lapply(1:length(bw_files), function(x){
+  parLapply(cl, 1:length(bw_files), function(x){
     bn = paste0(basename(bw_files[x]), '.txt')
     mcmd2 = paste0(mcmd, binsize,' ', paste0(up, ":", down), ' ',pos,' ', bed, ' ', bw_files[x], ' ', bn)
     system(command = mcmd2, intern = TRUE)
@@ -62,6 +72,7 @@ get_matrix = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL
 
   del = list.files(path = op_dir, pattern="bw.txt")
   file.remove(del, bed)
+  stopCluster(cl)
 
   result = c(tables,
                 list(region = c(up, down), binSize = binsize, ref_position = pos, bed_file =  bed, bw_files = bw_files))

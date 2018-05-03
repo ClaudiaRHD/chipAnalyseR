@@ -5,7 +5,7 @@
 \title{Calculate polymerase2 pausing index for every gene according to the inserted gene model file.}
 \usage{
 pol2_index(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
-  filter = TRUE)
+  filter = TRUE, numcores = NULL)
 }
 \arguments{
 \item{gm}{Gene model. File with information about the transcription start and end position of every gene. Default value is NULL.}
@@ -17,6 +17,8 @@ pol2_index(gm = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
 \item{op_dir}{The path to the operation directory currently used. Default value is NULL.}
 
 \item{filter}{Filter which can be used to filter the output list to remove  duplicated and overlapping genes as well as non necessary columns. Default value is TRUE.}
+
+\item{numcores}{Number of cores which should be used in parallelised process.Default value is NULL and will be defined as the number of available cores - 1.}
 }
 \value{
 list (name, size_tss, sum_tss, size_gb, sum_gb, geneNAme, TxName, chrom ,strand, txStart, txEnd, nr, dr, pi). IF filter = TRUE : list (name, geneName, txName, chrom, strand, txStart, txEnd, nr, dr, pi, dif)

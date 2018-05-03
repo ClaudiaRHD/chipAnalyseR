@@ -4,10 +4,12 @@
 #' @param bw_files One or a character vector with multiple files in bigWig format. Default value is NULL.
 #' @param bw_path The path to directory where bwtool is installed on the computer. Default value is NULL.
 #' @param op_dir The path to the operation directory currently used. Default value is NULL.
+#' @param numcores Number of cores which should be used in parallelised process.Default value is NULL and will be defined as the number of available cores - 1.
 #' @import data.table
+#' @import parallel
 #' @export
 
-auc_pi = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL){
+auc_pi = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL, numcores = NULL){
 
   #check for bwtools
   bw_path = check_bw(bw_path = bw_path)
@@ -36,9 +38,17 @@ auc_pi = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL){
     }
   }
 
+  #create cluster
+  if(is.null(numcores)){
+    ncores = parallel::detectCores()-1
+  } else{
+    ncores = numcores
+  }
+  cl = parallel::makeCluster(ncores)
+  
   #create matrix
   mcmd = paste(bw_path,  'summary -header -with-sum ')
-  lapply(1:length(bw_files), function(x){
+  parLapply(cl,1:length(bw_files), function(x){
     bn = paste0(basename(bw_files[x]), '.txt')
     mcmd2 = paste(mcmd, bed, bw_files[x], ' ', bn)
     system(command = mcmd2, intern = TRUE)
@@ -51,7 +61,7 @@ auc_pi = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL){
 
   del = list.files(path = op_dir, pattern="bw.txt")
   file.remove(del, bed)
-
+  
   #creating id
   for(i in 1: length(tables)){
     tables[[i]]$id = paste(tables[[i]]$'#chrom', tables[[i]]$'start', sep= '_')
@@ -68,7 +78,7 @@ auc_pi = function(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL){
   }
   
   tempdt[, c("id","num_data", "min", "max", "mean", "median") := NULL]
-
+  stopCluster(cl)
   message("Done.")
   return(tempdt)
 

@@ -5,7 +5,7 @@
 \title{Create a matrix with extracted data from a bigWig file within a specified region around a peak.}
 \usage{
 get_matrix(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
-  up = 2500, down = 2500, pos = "", binsize = 25)
+  up = 2500, down = 2500, pos = "", binsize = 25, numcores = NULL)
 }
 \arguments{
 \item{bed}{A file in bed format. Default value is NULL.}
@@ -23,6 +23,8 @@ get_matrix(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
 \item{pos}{Reference position of the region around a peak. Possibilities: '-starts' and '-ends'. Default value is '' and means a centered reference position.}
 
 \item{binsize}{Binsize of how many basepairs the avergae will be calculated. Default value is 25.}
+
+\item{numcores}{Number of cores which should be used in parallelised process.Default value is NULL and will be defined as the number of available cores - 1.}
 }
 \value{
 result list with matrices and additional information about the input of the function

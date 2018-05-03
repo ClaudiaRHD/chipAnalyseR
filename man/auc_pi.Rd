@@ -4,7 +4,8 @@
 \alias{auc_pi}
 \title{Calculate area under the peak}
 \usage{
-auc_pi(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL)
+auc_pi(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL,
+  numcores = NULL)
 }
 \arguments{
 \item{bed}{A file in bed format. Default value is NULL.}
@@ -14,6 +15,8 @@ auc_pi(bed = NULL, bw_files = NULL, bw_path = NULL, op_dir = NULL)
 \item{bw_path}{The path to directory where bwtool is installed on the computer. Default value is NULL.}
 
 \item{op_dir}{The path to the operation directory currently used. Default value is NULL.}
+
+\item{numcores}{Number of cores which should be used in parallelised process.Default value is NULL and will be defined as the number of available cores - 1.}
 }
 \description{
 Takes files in bigWig format and one file in bed format and calculates the area under the curve (peak). Returns a data.table with the results.
