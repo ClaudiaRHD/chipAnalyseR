@@ -4,16 +4,11 @@ An useful R package for ChIP-seq data analysis and visualisation.
 **!STILL IN DEVELOPMENT!**
 
 ## Installation
-
----
-
 ```r
 devtools::install_github(repo = 'ClaudiaRHD/chipAnalyser')
 ```
 
 ## Usage
-
----
 ### What you can do with chipAnalyseR 
 #### Visualisation
 * Profile plot
