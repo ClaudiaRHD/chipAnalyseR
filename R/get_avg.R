@@ -27,7 +27,7 @@ get_avg = function(mat= NULL){
   for (i in 1:nmats){
     mat[[i]][,'id'] =  paste(mat[[i]][,V1], mat[[i]][,V2], sep = '_')
     mat[[i]] = merge(mat[[i]], mat_mean[,c('Avg','id')], by='id')
-    mat[[i]] = mat[[i]][order(-Avg),]
+    mat[[i]] = mat[[i]][order(Avg),]
     mat[[i]] [, id := NULL]
   }
   mat_ssum =list()
