@@ -20,4 +20,6 @@ devtools::install_github(repo = 'ClaudiaRHD/chipAnalyser')
 * MA plot
 * RNA Polymerase 2 pausing index
 
+![brd4_hm](https://user-images.githubusercontent.com/34287600/39585110-4e43cbd4-4ef4-11e8-9e47-50f4411c0fc1.png)
+
 
