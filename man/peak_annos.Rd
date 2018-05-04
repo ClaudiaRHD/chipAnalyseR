@@ -8,6 +8,8 @@ peak_annos(p_anno = NULL, state2color = NULL)
 }
 \arguments{
 \item{p_anno}{File with peakID and corresponding Annotation. Default value is NULL.}
+
+\item{state2color}{File with 3 columns :1) region names as they are in the p_anno file; 2) region names as they should be shown in the image; 3) colors for plotting for each region name. Default value is NULL. If no state2color file is inserted function uses RColorBrewer palette}
 }
 \description{
 Creates pie charts with peak annotations of entered files.
