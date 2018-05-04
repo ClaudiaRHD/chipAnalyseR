@@ -1,0 +1,11 @@
+Package: chipAnalyseR
+Type: Package
+Title: R package for rapid ChIP-seq data analysis and visualisation. Especially bigWig files and BED files
+Version: 0.1.0
+Author: Claudia Robens
+Maintainer: claudia-robens@web.de
+Description: Useful package to anylyse and visualise ChIP-seq data. Output file formats like bigWig files and BED files and be read in an efficient way thanks to bwtool. The package is a combination of R code with elements written in C. 
+License: MIT
+LazyData: TRUE
+RoxygenNote: 6.0.1
+Depends: data.table, ggplot2, cowplot, parallel
