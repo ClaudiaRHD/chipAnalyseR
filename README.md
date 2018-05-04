@@ -40,6 +40,7 @@ devtools::install_github(repo = 'ClaudiaRHD/chipAnalyser')
 <img src="https://user-images.githubusercontent.com/34287600/39585110-4e43cbd4-4ef4-11e8-9e47-50f4411c0fc1.png" width="600" height="600" />
 </p>
 
+
 ##### **MA plot**
 ```r
 > BRD4_auc = chipAnalyseR::auc_pi(bed = "GSM2634756_U87_BRD4_peaks.narrowPeak", bw_files = c("GSM2634756_U87_BRD4.bw", "GSM2634758_U87_BRD4_dBET_2h.bw", "GSM2634757_U87_BRD4_dBET_24h.bw"), bw_path = "/R/", op_dir = "/R/GSE99171_RAW/", numcores = 6)
