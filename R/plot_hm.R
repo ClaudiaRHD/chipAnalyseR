@@ -145,5 +145,9 @@ plot_hm = function(mat = NULL, clusterBy = 'avg', num_k = NULL){
   ########## cluster legend ##########
   if(!is.null(num_k)){
     legend("bottom", legend= legendt, xpd = TRUE, horiz = TRUE, inset = c(0, 0), bty = "n", col = c(1:length(mat_prof[[1]])),lty = 1,  cex = 1, lwd = 2, text.font = 2)
+<<<<<<< HEAD
   }
+=======
+  } 
+>>>>>>> 0bfc74e4b3a22ad4172d9cf0c7b9b43a4a5fd8d8
 }

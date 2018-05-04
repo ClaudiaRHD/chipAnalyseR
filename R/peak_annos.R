@@ -9,8 +9,13 @@ peak_annos = function(p_anno = NULL, state2color = NULL ){
 
   if(is.null(p_anno)){
     stop("no p_anno file available")
+<<<<<<< HEAD
   }
 
+=======
+  }  
+ 
+>>>>>>> 0bfc74e4b3a22ad4172d9cf0c7b9b43a4a5fd8d8
   message("reading peak annotation file...")
   anno = list()
   anno_s = list()
@@ -20,13 +25,22 @@ peak_annos = function(p_anno = NULL, state2color = NULL ){
       anno_s [[i]]= strsplit(x = anno[[i]][,Annotation], split = " ")
       anno[[i]][,'name'] = sapply(X = anno_s[[i]], '[[',1)
     }
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 0bfc74e4b3a22ad4172d9cf0c7b9b43a4a5fd8d8
   if(!is.null(state2color)){
     seg = data.table::fread(input = state2color, header = TRUE)
     if(ncol(seg) < 3){
       colr = RColorBrewer::brewer.pal(n = 8, name = 'Dark2')
     }
+<<<<<<< HEAD
 
+=======
+    
+     
+>>>>>>> 0bfc74e4b3a22ad4172d9cf0c7b9b43a4a5fd8d8
     message("count annotation frequency and order them...")
     pa = list()
     for(i in 1:length(p_anno)){
