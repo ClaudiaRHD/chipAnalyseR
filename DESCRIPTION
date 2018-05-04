@@ -8,4 +8,4 @@ Description: Useful package to anylyse and visualise ChIP-seq data. Output file 
 License: MIT
 LazyData: TRUE
 RoxygenNote: 6.0.1
-Depends: data.table, ggplot2, cowplot, parallel
+Depends: data.table, ggplot2, cowplot, parallel, RColorBrewer
