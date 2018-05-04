@@ -8,4 +8,4 @@ Description: Useful package to analyse and visualise ChIP-seq data from bigWig a
 License: MIT
 LazyData: TRUE
 RoxygenNote: 6.0.1
-Depends: data.table, ggplot2, cowplot, parallel
+Imports: data.table, ggplot2, cowplot, parallel, RColorBrewer
