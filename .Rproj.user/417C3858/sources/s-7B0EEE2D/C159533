@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "760985921",
+    "hash" : "1206266094",
     "id" : "C159533",
-    "lastKnownWriteTime" : 1525426004,
-    "last_content_update" : 1525426004176,
+    "lastKnownWriteTime" : 1525429742,
+    "last_content_update" : 1525429742589,
     "path" : "~/GitHub/chipAnalyseR/README.md",
     "project_path" : "README.md",
     "properties" : {
-        "cursorPosition" : "57,0",
-        "scrollLine" : "57"
+        "cursorPosition" : "35,133",
+        "scrollLine" : "26"
     },
     "relative_order" : 1,
     "source_on_save" : false,
