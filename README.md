@@ -23,6 +23,7 @@ devtools::install_github(repo = 'ClaudiaRHD/chipAnalyser')
 * MA plot
 * RNA Polymerase 2 pausing index
 
+<<<<<<< HEAD
 #### **Example plots**
 ##### **Profile plot**
 ```r
@@ -57,3 +58,6 @@ devtools::install_github(repo = 'ClaudiaRHD/chipAnalyser')
 > chipAnalyseR::plot_pol2i(pol2_table = pol2_index)
 ```
 ![](https://user-images.githubusercontent.com/34287600/39582498-65b2d4dc-4eee-11e8-9ce2-168a91597340.png)
+=======
+
+>>>>>>> c354d8c292888acf4f7d5f9f0feffa080fb93be6
