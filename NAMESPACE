@@ -2,7 +2,6 @@
 
 export(auc_pi)
 export(get_matrix)
-export(peak_anno)
 export(peak_annos)
 export(plot_MA)
 export(plot_hm)
