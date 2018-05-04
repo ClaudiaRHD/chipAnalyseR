@@ -27,9 +27,8 @@ devtools::install_github(repo = 'ClaudiaRHD/chipAnalyser')
 > BRD4_mat = chipAnalyseR::get_matrix(bed = "GSM2634756_U87_BRD4_peaks.narrowPeak", bw_files = c("GSM2634756_U87_BRD4.bw", "GSM2634758_U87_BRD4_dBET_2h.bw", "GSM2634757_U87_BRD4_dBET_24h.bw"), bw_path = "/R/", op_dir = "/R/GSE99171_RAW/",up = 2500, down = 2500, pos = '', binsize = 10, numcores = 6)
 > chipAnalyseR::plot_profile(mat_sum = BRD4_mat, opt = 'mean')
 ```
-![](https://user-images.githubusercontent.com/34287600/39582290-f1175e9a-4eed-11e8-9d46-69cb1326c8b6.png)
 
-
+<img src="https://user-images.githubusercontent.com/34287600/39582290-f1175e9a-4eed-11e8-9d46-69cb1326c8b6.png" width="200" height="400" />
 ##### **Heat map**
 ```r
 > BRD4_mat = chipAnalyseR::get_matrix(bed = "GSM2634756_U87_BRD4_peaks.narrowPeak", bw_files = c("GSM2634756_U87_BRD4.bw", "GSM2634758_U87_BRD4_dBET_2h.bw", "GSM2634757_U87_BRD4_dBET_24h.bw"), bw_path = "/R/", op_dir = "/R/GSE99171_RAW/",up = 2500, down = 2500, pos = '', binsize = 10, numcores = 6)
