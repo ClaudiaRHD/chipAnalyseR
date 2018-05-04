@@ -37,7 +37,7 @@ devtools::install_github(repo = 'ClaudiaRHD/chipAnalyser')
 > chipAnalyseR::plot_hm(mat = BRD4_mat)
 ```
 <p align="center">
-<img src="https://user-images.githubusercontent.com/34287600/39585110-4e43cbd4-4ef4-11e8-9e47-50f4411c0fc1.png" width="600" height="600" />
+<img src="https://user-images.githubusercontent.com/34287600/39629232-c32b202a-4fab-11e8-91b7-48bef2f74066.png" width="1000" height="600" />
 </p>
 
 
