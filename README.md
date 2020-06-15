@@ -1,7 +1,6 @@
 # chipAnalyseR
 An useful R package for ChIP-seq data analysis and visualisation.
 
-**!STILL IN DEVELOPMENT!**
 
 ## Installation
 ```r
